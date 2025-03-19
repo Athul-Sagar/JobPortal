@@ -14,7 +14,7 @@ ConnectDb()
 
 const app=express()
 const corsOptions = {
-    origin: 'https://jobportal-frontend-2-crqr.onrender.com',
+    origin: 'http://localhost:5173',
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
