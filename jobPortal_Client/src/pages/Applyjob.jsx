@@ -60,30 +60,36 @@ const Applyjob = () => {
   const applyHandler = async () => {
     try {
       if (!user) {
-        return toast.error('Login to Apply For Jobs');
+        toast.error('Login to Apply For Jobs');
+        return;
       }
   
       if (!user.resume) {
-        navigate('/applications')
-        return toast.error('Upload resume to apply');
+        navigate('/applications');
+        toast.error('Upload resume to apply');
+        return;
       }
   
       // Sending request to apply for the job
       const response = await axios.post(
         backendUrl + `/api/auth/apply/`,
-        {jobId:jobData._id}, // Add any required request body here
+        { jobId: jobData._id },
         { withCredentials: true }
       );
+  
+      console.log("Apply Response:", response.data); // Debugging
   
       if (response.data.success) {
         toast.success('Applied successfully!');
       } else {
-        toast.error(response.data.message);
+        toast.error(response.data.message || "Application failed.");
       }
     } catch (error) {
+      console.error("Apply Error:", error); // Debugging
       toast.error(error.response?.data?.message || 'Something went wrong');
     }
   };
+  
   
 
 
