@@ -5,6 +5,7 @@ import {
     getUser, 
     getUserJobApplication, 
     Login, 
+    logoutUser, 
     Register, 
     updateUserResume 
 } from '../controllers/userController.js';
@@ -43,5 +44,7 @@ router.put('/update-resume', authMiddleware, (req, res, next) => {
         next();
     });
 }, updateUserResume);
+
+router.post('/logout',logoutUser)
 
 export default router;

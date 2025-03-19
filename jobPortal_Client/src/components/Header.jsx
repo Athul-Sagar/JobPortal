@@ -29,11 +29,17 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post(backendUrl + '/api/auth/logout', {}, { withCredentials: true });
+      await axios.post(backendUrl + '/api/auth/logout', {}, { 
+        withCredentials: true 
+      });
       setUser(null);
+      setDropdownOpen(false);
       navigate("/");
+      // Add page reload to ensure cookie changes take effect
+      window.location.reload();
     } catch (error) {
-      console.log(error, "Error logging out");
+      console.log("Error logging out:", error.response?.data || error);
+      toast.error(error.response?.data?.message || "Logout failed");
     }
   };
 
